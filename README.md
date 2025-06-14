@@ -32,6 +32,7 @@ Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app
 ## 📁 Project Structure
 
  
+
  📋 **app.py** # Streamlit frontend
  
  📩 **Text_Summarizer.ipynb** # Jupyter Notebook (testing)
@@ -40,12 +41,13 @@ Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app
  
  📂 **README.md** # Project description 
 
+
 ## 📱 How to Run the App
 
-### 1️⃣ Install Dependencies
+1️⃣ **Install Dependencies**
 pip install -r requirements.txt
 
-### 2️⃣ Run the Streamlit app
+2️⃣ **Run the Streamlit app**
 streamlit run app.py
 
 ## 📜 Sample Use Case
