@@ -18,6 +18,7 @@ It is an AI-powered web application that summarizes long-form text using:
 
 Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app provides a fast, simple interface to generate and download clean summaries.
 
+
 ## 🚀 Features
 
 - 🧠 BART Transformer (Abstractive Summarizer)
@@ -28,6 +29,7 @@ Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app
 - 📜 Summary download as `.txt`
 - 🎛️ Dynamic summary length sliders
 - 🌗 Light/Dark mode compatible
+
 
 ## 📁 Project Structure
 
@@ -42,6 +44,7 @@ Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app
  📂 **README.md** # Project description 
 
 
+
 ## 📱 How to Run the App
 
 1️⃣ **Install Dependencies**
@@ -49,6 +52,7 @@ pip install -r requirements.txt
 
 2️⃣ **Run the Streamlit app**
 streamlit run app.py
+
 
 ## 📜 Sample Use Case
 **Input**: A long article, blog post, research paper, or Wikipedia page
