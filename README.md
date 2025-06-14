@@ -1,9 +1,15 @@
 # TEXT-SUMMARIZATION-TOOL
+
 **COMPANY*: CODTECH IT SOLUTIONS
+
 **NAME*: HIMANI JOSHI
+
 **INTERN ID*: CTO4DN1683
+
 **DOMAIN*: ARTIFICIAL INTELLIGENCE
+
 **DURATION*: 4 WEEKS
+
 **MENTOR*: NEELA SANTOSH
 
 It is an AI-powered web application that summarizes long-form text using:
@@ -25,9 +31,13 @@ Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app
 
 ## 📁 Project Structure
 
+ 
  📋 **app.py** # Streamlit frontend
+ 
  📩 **Text_Summarizer.ipynb** # Jupyter Notebook (testing)
+ 
  🔡 **requirements.txt** # Dependencies
+ 
  📂 **README.md** # Project description 
 
 ## 📱 How to Run the App
