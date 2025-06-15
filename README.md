@@ -56,6 +56,7 @@ streamlit run app.py
 
 ## 📜 Sample Use Case
 **Input**: A long article, blog post, research paper, or Wikipedia page
+
 **Output**: A concise and meaningful summary
 
 
