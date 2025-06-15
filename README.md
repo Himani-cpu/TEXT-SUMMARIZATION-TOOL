@@ -21,14 +21,24 @@ Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app
 
 ## 🚀 Features
 
-- 🧠 BART Transformer (Abstractive Summarizer)
-- ⚡ TextRank (Extractive Summarizer using Sumy + NLTK)
-- 📄 Clean Streamlit UI with:
-- 📲 Tabs for Input & Output
-- 🔗 Sidebar controls
-- 📜 Summary download as `.txt`
-- 🎛️ Dynamic summary length sliders
-- 🌗 Light/Dark mode compatible
+🧠 BART Transformer (Abstractive)
+
+⚡ TextRank (Extractive with Sumy + NLTK)
+
+🖼️ Side-by-side comparison of both methods
+
+📄 Upload .txt files or paste text directly
+
+🗣️ Text-to-Speech (TTS) for generated summaries
+
+✍️ Word & character count
+
+📥 Summary download as .txt
+
+🌓 Light/Dark mode toggle
+
+🧪 Jupyter Notebook for development/testing
+
 
 
 ## 📁 Project Structure
