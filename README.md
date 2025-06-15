@@ -45,13 +45,15 @@ Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app
 
  
 
- 📋 **app.py** # Streamlit frontend
+ 📄 **app.py** # Streamlit frontend
  
- 📩 **Text_Summarizer.ipynb** # Jupyter Notebook (testing)
+ 📓 **Text_Summarizer.ipynb** # Jupyter Notebook (testing)
  
- 🔡 **requirements.txt** # Dependencies
+ 📦 **requirements.txt** # Dependencies
  
- 📂 **README.md** # Project description 
+ 📘 **README.md**   # Project description 
+
+ 📜 **runtime.txt** # Optional: Python version for Streamlit Cloud
 
 
 
@@ -67,6 +69,18 @@ streamlit run app.py
 ## 📜 Sample Use Case
 **Input**: A long article, blog post, research paper, or Wikipedia page
 
-**Output**: A concise and meaningful summary
+**Output**: A concise and meaningful summary using your preferred summarization technique — BART or TextRank.
+
+## 🌐 Deploy on Streamlit Cloud
+
+Push your code to GitHub
+
+Go to streamlit.io/cloud
+
+Connect your GitHub repo
+
+Select app.py as the entry point
+
+🚀 Deploy!
 
 
