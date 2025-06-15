@@ -1,5 +1,6 @@
 streamlit
-transformers
-torch
-sumy
+transformers==4.37.0
+torch==2.7.0
 nltk
+sumy
+gTTS
