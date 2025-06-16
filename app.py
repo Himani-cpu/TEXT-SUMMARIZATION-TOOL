@@ -23,9 +23,14 @@ for resource in ["punkt"]:
         nltk.download(resource)
 
 # Load BART model/tokenizer
-bart_tokenizer = BartTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
-bart_model = BartForConditionalGeneration.from_pretrained("sshleifer/distilbart-cnn-12-6")
-bart_model.to("cpu")
+@st.cache_resource(show_spinner=False)
+def load_bart():
+    tokenizer = BartTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
+    model = BartForConditionalGeneration.from_pretrained("sshleifer/distilbart-cnn-12-6")
+    model.to("cpu")
+    return tokenizer, model
+
+bart_tokenizer, bart_model = load_bart()
 
 # --- Summarization Functions ---
 def summarize_with_bart(text, max_len=130, min_len=30):
@@ -43,7 +48,7 @@ def summarize_with_textrank(text, num_sentences=3):
 
 def get_download_link(text, filename="summary.txt"):
     b64 = base64.b64encode(text.encode()).decode()
-    return f'<a href="data:file/txt;base64,{b64}" download="{filename}">📥 Download Summary</a>'
+    return f'<a href="data:file/txt;base64,{b64}" download="{filename}">\U0001F4E5 Download Summary</a>'
 
 # --- Streamlit UI ---
 st.set_page_config(page_title="AI Text Summarizer", layout="wide")
