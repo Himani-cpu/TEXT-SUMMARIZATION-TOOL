@@ -23,7 +23,7 @@ for resource in ["punkt"]:
 
 # Load BART model/tokenizer
 bart_tokenizer = BartTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
-bart_model = BartForConditionalGeneration.from_pretrained("sshleifer/distilbart-cnn-12-6")
+bart_model = BartForConditionalGeneration.from_pretrained("sshleifer/distilbart-cnn-12-6", torch_dtype=torch.float32)
 bart_model.to("cpu")
 
 # --- Summarization Functions ---
