@@ -13,6 +13,7 @@ from io import StringIO
 import base64
 import nltk
 import torch
+import os
 
 # Download NLTK tokenizer
 for resource in ["punkt"]:
@@ -23,7 +24,7 @@ for resource in ["punkt"]:
 
 # Load BART model/tokenizer
 bart_tokenizer = BartTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
-bart_model = BartForConditionalGeneration.from_pretrained("sshleifer/distilbart-cnn-12-6", torch_dtype=torch.float32)
+bart_model = BartForConditionalGeneration.from_pretrained("sshleifer/distilbart-cnn-12-6")
 bart_model.to("cpu")
 
 # --- Summarization Functions ---
@@ -71,7 +72,7 @@ if theme == "🌙 Dark":
 # Summarization Method
 method = st.sidebar.radio("Choose Summarization Method:", ["🧠 BART Transformer", "⚡ TextRank (Fast)", "🆚 Compare Both"])
 
-# Params
+# Parameters
 if method == "🧠 BART Transformer":
     max_len = st.sidebar.slider("Max Summary Length", 50, 300, 130, step=10)
     min_len = st.sidebar.slider("Min Summary Length", 10, 100, 30, step=5)
@@ -96,7 +97,7 @@ with tab1:
     else:
         text_input = st.text_area("Or paste your text here:", height=300, placeholder="Type or paste your article here...")
 
-    # Show counts
+    # Show stats
     if text_input.strip():
         words = len(text_input.split())
         chars = len(text_input)
@@ -110,7 +111,7 @@ if "summary_text_bart" not in st.session_state:
 if "summary_text_textrank" not in st.session_state:
     st.session_state.summary_text_textrank = ""
 
-# Generate Button
+# Generate Summary
 if st.button("✨ Generate Summary"):
     if not text_input.strip():
         st.warning("⚠️ Please enter some text first.")
@@ -120,18 +121,16 @@ if st.button("✨ Generate Summary"):
                 if method == "🧠 BART Transformer":
                     summary = summarize_with_bart(text_input, max_len=max_len, min_len=min_len)
                     st.session_state.summary_text_bart = summary
-                    st.session_state.summary_done = True
 
                 elif method == "⚡ TextRank (Fast)":
                     summary = summarize_with_textrank(text_input, sentence_count)
                     st.session_state.summary_text_textrank = summary
-                    st.session_state.summary_done = True
 
                 elif method == "🆚 Compare Both":
                     st.session_state.summary_text_bart = summarize_with_bart(text_input, max_len=max_len, min_len=min_len)
                     st.session_state.summary_text_textrank = summarize_with_textrank(text_input, sentence_count)
-                    st.session_state.summary_done = True
 
+                st.session_state.summary_done = True
             except Exception as e:
                 st.error(f"🚨 Error: {e}")
                 st.session_state.summary_done = False
@@ -147,15 +146,17 @@ with tab2:
             st.markdown(f"📊 **Words**: {len(bart_summary.split())} | **Chars**: {len(bart_summary)}")
 
             try:
-                tts = gTTS(text=bart_summary)
-                tts.save("bart_summary.mp3")
-                with open("bart_summary.mp3", "rb") as audio_file:
-                    audio_bytes = audio_file.read()
-                st.audio(audio_bytes, format="audio/mp3")
-                b64 = base64.b64encode(audio_bytes).decode()
-                st.markdown(f'<a href="data:audio/mp3;base64,{b64}" download="bart_summary.mp3">📥 Download MP3</a>', unsafe_allow_html=True)
+                if bart_summary.strip():
+                    tts = gTTS(text=bart_summary, lang='en')
+                    tts.save("bart_summary.mp3")
+                    with open("bart_summary.mp3", "rb") as audio_file:
+                        audio_bytes = audio_file.read()
+                    st.audio(audio_bytes, format="audio/mp3")
+                    b64 = base64.b64encode(audio_bytes).decode()
+                    st.markdown(f'<a href="data:audio/mp3;base64,{b64}" download="bart_summary.mp3">📥 Download MP3</a>', unsafe_allow_html=True)
             except Exception as e:
-                st.warning(f"🎧 Could not create audio: {e}")
+                st.warning("🎧 Could not create audio.")
+                st.error(f"{e}")
 
         if method in ["⚡ TextRank (Fast)", "🆚 Compare Both"]:
             st.subheader("⚡ TextRank Summary")
@@ -164,13 +165,16 @@ with tab2:
             st.markdown(get_download_link(tr_summary, "textrank_summary.txt"), unsafe_allow_html=True)
             st.markdown(f"📊 **Words**: {len(tr_summary.split())} | **Chars**: {len(tr_summary)}")
 
-        try:
-            tts_tr = gTTS(text=tr_summary)
-            tts_tr.save("textrank_summary.mp3")
-            with open("textrank_summary.mp3", "rb") as audio_file:
-                audio_bytes_tr = audio_file.read()
-            st.audio(audio_bytes_tr, format="audio/mp3")
-            b64_tr = base64.b64encode(audio_bytes_tr).decode()
-            st.markdown(f'<a href="data:audio/mp3;base64,{b64_tr}" download="textrank_summary.mp3">📥 Download MP3</a>', unsafe_allow_html=True)
-        except Exception as e:
-            st.warning(f"🎧 Could not create TextRank audio: {e}")
+            try:
+                if tr_summary.strip():
+                    tts_tr = gTTS(text=tr_summary, lang='en')
+                    tts_tr.save("textrank_summary.mp3")
+                    with open("textrank_summary.mp3", "rb") as audio_file:
+                        audio_bytes_tr = audio_file.read()
+                    st.audio(audio_bytes_tr, format="audio/mp3")
+                    b64_tr = base64.b64encode(audio_bytes_tr).decode()
+                    st.markdown(f'<a href="data:audio/mp3;base64,{b64_tr}" download="textrank_summary.mp3">📥 Download MP3</a>', unsafe_allow_html=True)
+            except Exception as e:
+                st.warning("🎧 Could not create TextRank audio.")
+                st.error(f"{e}")
+
