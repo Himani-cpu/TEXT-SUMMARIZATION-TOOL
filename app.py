@@ -1,4 +1,7 @@
 # app.py
+# 🚫 Suppress torch UserWarnings
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module="torch")
 
 import streamlit as st
 from transformers import BartTokenizer, BartForConditionalGeneration
