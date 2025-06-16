@@ -19,8 +19,8 @@ for resource in ["punkt"]:
         nltk.download(resource)
 
 # Load BART model/tokenizer
-bart_tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn")
-bart_model = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn")
+bart_tokenizer = BartTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
+bart_model = BartForConditionalGeneration.from_pretrained("sshleifer/distilbart-cnn-12-6")
 bart_model.to("cpu")
 
 # --- Summarization Functions ---
