@@ -81,6 +81,6 @@ Connect your GitHub repo
 
 Select app.py as the entry point
 
-🚀 Deploy!
+**🚀 Deploy!**
 
 
