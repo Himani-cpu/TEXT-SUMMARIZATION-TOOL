@@ -12,8 +12,10 @@
 
 **MENTOR*: NEELA SANTOSH
 
+## 📝 Project Overview
+
 It is an AI-powered web application that summarizes long-form text using:
-- **Abstractive Summarization** with `facebook/bart-large-cnn` (transformers)
+- **Abstractive Summarization** with `sshleifer/distilbart-cnn-12-6` (transformers)
 - **Extractive Summarization** with TextRank (sumy)
 
 Built using **Python**, **Streamlit**, and **HuggingFace Transformers**, the app provides a fast, simple interface to generate and download clean summaries.
